@@ -1,27 +1,58 @@
 #!/bin/bash
 
-while [ 1 ];
-do
-    count=`curl -s "https://sa.ucla.edu/ro/Public/SOC/Results/ClassDetail?term_cd=17F&subj_area_cd=COM%20SCI&crs_catlg_no=0181%20%20%20%20&class_id=187787200&class_no=%20001%20%20" | grep -c "Closed by"`
+function myfunc()
+{
 
-    echo "$count"
-
+    count=`curl -s $1 | grep -c "Closed by"`
+    #echo "$count"
+    
     if [ "$count" != "0" ]
     then
-       echo "course is closed by department!"
+        #echo "course is closed by department!"
+	temp=0
     fi
-
-    count2=`curl -s "https://sa.ucla.edu/ro/Public/SOC/Results/ClassDetail?term_cd=17F&subj_area_cd=COM%20SCI&crs_catlg_no=0181%20%20%20%20&class_id=187787200&class_no=%20001%20%20" | grep -c "Waitlist:"`
-
-
-    echo "$count2"
-
+    
+    count2=`curl -s $1 | grep -c "Open:"`
+    
+    
+    #echo "$count2"
+    
     if [ "$count2" != "0" ]
     then
-       echo "course is waitlisted, go join the wait list!"
-       open /Applications/Google\ Chrome.app/ 'https://sa.ucla.edu/ro/Public/SOC/Results/ClassDetail?term_cd=17F&subj_area_cd=COM%20SCI&crs_catlg_no=0181%20%20%20%20&class_id=187787200&class_no=%20001%20%20'
+        #echo "course is waitlisted, go join the wait list!"
+        open /Applications/Google\ Chrome.app/ "$1"
+        service1=1
+	echo "1"
     else
-       echo "no waitlist available for this class!"
+        #echo "no waitlist available for this class!"
+	echo "0"
+    fi  
+    
+}
+result1=0
+result2=0
+while [ 1 ];
+do
+    echo "$result1"
+    if [ "$result1" == "0" ]
+    then
+	echo "$result1"
+	result1=$(myfunc "https://sa.ucla.edu/ro/Public/SOC/Results/ClassDetail?term_cd=17F&subj_area_cd=COM%20SCI&crs_catlg_no=0181%20%20%20%20&class_id=187787200&class_no=%20001%20%20")
+    else
+	echo "The class is open"
     fi
-    sleep 10   
+
+    echo "$result2"
+    if [ "$result2" == "0" ]
+    then
+        echo "$result2"
+        result2=$(myfunc "https://sa.ucla.edu/ro/Public/SOC/Results/ClassDetail?term_cd=17F&subj_area_cd=EL%20ENGR&crs_catlg_no=0163A%20%20%20&class_id=190785200&class_no=%20001%20%20")
+	if [ "$result2" == "1" ]
+	then
+	    echo "EE163 is open" | mail -s "EE163A is open" g090617@g.ucla.edu 
+	fi
+    else
+        echo "The class EE163A is open!"
+    fi
+    sleep 100
 done
