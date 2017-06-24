@@ -1,0 +1,27 @@
+#!/bin/bash
+
+while [ 1 ];
+do
+    count=`curl -s "https://sa.ucla.edu/ro/Public/SOC/Results/ClassDetail?term_cd=17F&subj_area_cd=COM%20SCI&crs_catlg_no=0181%20%20%20%20&class_id=187787200&class_no=%20001%20%20" | grep -c "Closed by"`
+
+    echo "$count"
+
+    if [ "$count" != "0" ]
+    then
+       echo "course is closed by department!"
+    fi
+
+    count2=`curl -s "https://sa.ucla.edu/ro/Public/SOC/Results/ClassDetail?term_cd=17F&subj_area_cd=COM%20SCI&crs_catlg_no=0181%20%20%20%20&class_id=187787200&class_no=%20001%20%20" | grep -c "Waitlist:"`
+
+
+    echo "$count2"
+
+    if [ "$count2" != "0" ]
+    then
+       echo "course is waitlisted, go join the wait list!"
+       open /Applications/Google\ Chrome.app/ 'https://sa.ucla.edu/ro/Public/SOC/Results/ClassDetail?term_cd=17F&subj_area_cd=COM%20SCI&crs_catlg_no=0181%20%20%20%20&class_id=187787200&class_no=%20001%20%20'
+    else
+       echo "no waitlist available for this class!"
+    fi
+    sleep 10   
+done
