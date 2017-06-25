@@ -32,7 +32,7 @@ function myfunc()
 result1=0
 result2=0
 result3=0
-
+counter=0
 while [ 1 ];
 do
     echo "$result1"
