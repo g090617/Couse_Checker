@@ -52,6 +52,7 @@ do
 	if [ "$result2" == "1" ]
 	then
 	    echo "EE163 is open" | mail -s "EE163A is open" g090617@g.ucla.edu 
+	    #echo "Mail from Course Checker" | mail -s "This is the mail from Course Chcker that reminds you that your course PHYSIC 3 Lab 1A is being tracked by every half an hour from now on" carrrie0324@gmail.com
 	fi
     else
         echo "The class EE163A is open!"
@@ -70,4 +71,5 @@ echo "$result3"
         echo "The class Lab1A is open!"
     fi
     sleep 100
+    echo "EE163 is open" | mail -s "EE163A is open" g090617@g.ucla.edu
 done
