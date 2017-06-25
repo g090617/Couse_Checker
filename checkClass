@@ -64,7 +64,7 @@ echo "$result3"
         result3=$(myfunc "https://sa.ucla.edu/ro/Public/SOC/Results/ClassDetail?term_cd=171&subj_area_cd=PHYSCI%20&crs_catlg_no=0003%20%20%20%20&class_id=387009110&class_no=%20001%20%20")
         if [ "$result3" == "1" ]
         then
-            echo "Lab 1A is open" | mail -s "Lab1A is open" g090617@g.ucla.edu
+            echo "Lab 1A is open" | mail -s "Lab1A is open" carrrie0324@gmail.com
         fi
     else
         echo "The class Lab1A is open!"

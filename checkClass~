@@ -20,7 +20,7 @@ function myfunc()
     if [ "$count2" != "0" ]
     then
         #echo "course is waitlisted, go join the wait list!"
-        open /Applications/Google\ Chrome.app/ "$1"
+        #open /Applications/Google\ Chrome.app/ "$1"
         service1=1
 	echo "1"
     else
